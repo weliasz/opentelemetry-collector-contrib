@@ -171,6 +171,7 @@ import (
 	"github.com/open-telemetry/opentelemetry-collector-contrib/receiver/riakreceiver"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/receiver/saphanareceiver"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/receiver/sapmreceiver"
+	"github.com/open-telemetry/opentelemetry-collector-contrib/receiver/scriptreceiver"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/receiver/signalfxreceiver"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/receiver/simpleprometheusreceiver"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/receiver/skywalkingreceiver"
@@ -307,6 +308,7 @@ func Components() (otelcol.Factories, error) {
 		udplogreceiver.NewFactory(),
 		vcenterreceiver.NewFactory(),
 		zipkinreceiver.NewFactory(),
+		scriptreceiver.NewFactory(),
 	}
 	factories.Receivers, err = receiver.MakeFactoryMap(receivers...)
 	if err != nil {

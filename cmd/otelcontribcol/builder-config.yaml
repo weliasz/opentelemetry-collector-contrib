@@ -370,6 +370,7 @@ replaces:
   - github.com/open-telemetry/opentelemetry-collector-contrib/pkg/translator/prometheus => ../../pkg/translator/prometheus
   - github.com/open-telemetry/opentelemetry-collector-contrib/receiver/googlecloudpubsubreceiver => ../../receiver/googlecloudpubsubreceiver
   - github.com/open-telemetry/opentelemetry-collector-contrib/exporter/sumologicexporter => ../../exporter/sumologicexporter
+  - github.com/open-telemetry/opentelemetry-collector-contrib/receiver/scriptreceiver => ../../receiver/scriptreceiver
   - github.com/open-telemetry/opentelemetry-collector-contrib/exporter/instanaexporter => ../../exporter/instanaexporter
   - github.com/open-telemetry/opentelemetry-collector-contrib/receiver/otlpjsonfilereceiver => ../../receiver/otlpjsonfilereceiver
   - github.com/open-telemetry/opentelemetry-collector-contrib/processor/redactionprocessor => ../../processor/redactionprocessor
