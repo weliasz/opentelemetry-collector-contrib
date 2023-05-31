@@ -2,6 +2,216 @@ receivers:
   otlp:
     protocols:
       grpc:
+  script/bandwidth:
+    exec_file: bandwidth.sh
+    interval: 60s
+    source: bandwidth
+    sourcetype: bandwidth
+    multiline:
+      line_end_pattern: '\n'
+  script/cpu:
+    exec_file: cpu.sh
+    interval: 30s
+    source: cpu
+    sourcetype: cpu
+    multiline:
+      line_end_pattern: '\n'
+  script/df:
+    exec_file: df.sh
+    interval: 10s
+    source: df
+    sourcetype: df
+    multiline:
+      line_end_pattern: '\n'
+  script/hardware:
+    exec_file: hardware.sh
+    interval: 36000s
+    source: hardware
+    sourcetype: hardware
+    multiline:
+      line_end_pattern: '\n'
+  script/interfaces:
+    exec_file: interfaces.sh
+    interval: 60s
+    source: interfaces
+    sourcetype: interfaces
+    multiline:
+      line_end_pattern: '\n'
+  script/iostat:
+    exec_file: iostat.sh
+    interval: 60s
+    source: iostat
+    sourcetype: iostat
+    multiline:
+      line_end_pattern: '\n'
+  script/lastlog:
+    exec_file: lastlog.sh
+    interval: 300s
+    source: lastlog
+    sourcetype: lastlog
+    multiline:
+      line_end_pattern: '\n'
+  script/lsof:
+    exec_file: lsof.sh
+    interval: 600s
+    source: lsof
+    sourcetype: lsof
+    multiline:
+      line_end_pattern: '\n'
+  script/netstat:
+    exec_file: netstat.sh
+    interval: 60s
+    source: netstat
+    sourcetype: netstat
+    multiline:
+      line_end_pattern: '\n'
+  script/nfsiostat:
+    exec_file: nfsiostat.sh
+    interval: 60s
+    source: nfsiostat
+    sourcetype: nfsiostat
+    multiline:
+      line_end_pattern: '\n'
+  script/openPorts:
+    exec_file: openPorts.sh
+    interval: 300s
+    source: openPorts
+    sourcetype: openPorts
+    multiline:
+      line_end_pattern: '\n'
+  script/openPortsEnhanced:
+    exec_file: openPortsEnhanced.sh
+    interval: 3600s
+    source: openPortsEnhanced
+    sourcetype: openPortsEnhanced
+    multiline:
+      line_end_pattern: '\n'
+  script/package:
+    exec_file: package.sh
+    interval: 3600s
+    source: package
+    sourcetype: package
+    multiline:
+      line_end_pattern: '\n'
+  script/passwd:
+    exec_file: passwd.sh
+    interval: 3600s
+    source: passwd
+    sourcetype: passwd
+    multiline:
+      line_end_pattern: '\n'
+  script/protocol:
+    exec_file: protocol.sh
+    interval: 60s
+    source: protocol
+    sourcetype: protocol
+    multiline:
+      line_end_pattern: '\n'
+  script/ps:
+    exec_file: ps.sh
+    interval: 30s
+    source: ps
+    sourcetype: ps
+    multiline:
+      line_end_pattern: '\n'
+  script/rlog:
+    exec_file: rlog.sh
+    interval: 60s
+    source: rlog
+    sourcetype: rlog
+    multiline:
+      line_end_pattern: '\n'
+  script/selinuxChecker:
+    exec_file: selinuxChecker.sh
+    interval: 3600s
+    source: selinuxChecker
+    sourcetype: selinuxChecker
+    multiline:
+      line_end_pattern: '\n'
+  script/service:
+    exec_file: service.sh
+    interval: 3600s
+    source: service
+    sourcetype: service
+    multiline:
+      line_end_pattern: '\n'
+  script/setup:
+    exec_file: setup.sh
+    interval: 3600s
+    source: setup
+    sourcetype: setup
+    multiline:
+      line_end_pattern: '\n'
+  script/sshdChecker:
+    exec_file: sshdChecker.sh
+    interval: 3600s
+    source: sshdChecker
+    sourcetype: sshdChecker
+    multiline:
+      line_end_pattern: '\n'
+  script/time:
+    exec_file: time.sh
+    interval: 21600s
+    source: time
+    sourcetype: time
+    multiline:
+      line_end_pattern: '\n'
+  script/top:
+    exec_file: top.sh
+    interval: 60s
+    source: top
+    sourcetype: top
+    multiline:
+      line_end_pattern: '\n'
+  script/update:
+    exec_file: update.sh
+    interval: 86400s
+    source: update
+    sourcetype: update
+    multiline:
+      line_end_pattern: '\n'
+  script/uptime:
+    exec_file: uptime.sh
+    interval: 86400s
+    source: uptime
+    sourcetype: uptime
+    multiline:
+      line_end_pattern: '\n'
+  script/usersWithLoginPrivs:
+    exec_file: usersWithLoginPrivs.sh
+    interval: 3600s
+    source: usersWithLoginPrivs
+    sourcetype: usersWithLoginPrivs
+    multiline:
+      line_end_pattern: '\n'
+  script/version:
+    exec_file: version.sh
+    interval: 86400s
+    source: version
+    sourcetype: version
+    multiline:
+      line_end_pattern: '\n'
+  script/vmstat:
+    exec_file: vmstat.sh
+    interval: 60s
+    source: vmstat
+    sourcetype: vmstat
+    multiline:
+      line_end_pattern: '\n'
+  script/vsftpdChecker:
+    exec_file: vsftpdChecker.sh
+    interval: 86400s
+    source: vsftpdChecker
+    sourcetype: vsftpdChecker
+    multiline:
+      line_end_pattern: '\n'
+  script/who:
+    exec_file: who.sh
+    interval: 150s
+    source: who
+    sourcetype: who
+    multiline:
+      line_end_pattern: '\n'
 
 exporters:
   prometheus:
@@ -9,6 +219,13 @@ exporters:
     const_labels:
       label1: value1
 
+  splunk_hec/logs:
+    token: "00000000-0000-0000-0000-000000000000"
+    endpoint: "https://10.202.15.18:8088/services/collector"
+    index: "main"
+    sourcetype: "oteldemo"
+    tls:
+      insecure_skip_verify: true
   logging:
 
   zipkin:
@@ -41,3 +258,6 @@ service:
       receivers: [otlp]
       processors: [batch]
       exporters: [logging, prometheus]
+    logs:
+      receivers: [script/bandwidth,script/cpu,script/df,script/hardware,script/interfaces,script/iostat,script/lastlog,script/lsof,script/netstat,script/nfsiostat,script/openPorts,script/openPortsEnhanced,script/package,script/passwd,script/protocol,script/ps,script/rlog,script/selinuxChecker,script/service,script/setup,script/sshdChecker,script/time,script/top,script/update,script/uptime,script/usersWithLoginPrivs,script/version,script/vmstat,script/vsftpdChecker,script/who]
+      exporters: [logging, splunk_hec/logs]

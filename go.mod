@@ -144,6 +144,7 @@ require (
 	github.com/open-telemetry/opentelemetry-collector-contrib/receiver/riakreceiver v0.77.0
 	github.com/open-telemetry/opentelemetry-collector-contrib/receiver/saphanareceiver v0.77.0
 	github.com/open-telemetry/opentelemetry-collector-contrib/receiver/sapmreceiver v0.77.0
+	github.com/open-telemetry/opentelemetry-collector-contrib/receiver/scriptreceiver v0.77.0
 	github.com/open-telemetry/opentelemetry-collector-contrib/receiver/signalfxreceiver v0.77.0
 	github.com/open-telemetry/opentelemetry-collector-contrib/receiver/simpleprometheusreceiver v0.77.0
 	github.com/open-telemetry/opentelemetry-collector-contrib/receiver/skywalkingreceiver v0.77.0
@@ -1002,6 +1003,8 @@ replace github.com/open-telemetry/opentelemetry-collector-contrib/receiver/riakr
 replace github.com/open-telemetry/opentelemetry-collector-contrib/receiver/saphanareceiver => ./receiver/saphanareceiver
 
 replace github.com/open-telemetry/opentelemetry-collector-contrib/receiver/sapmreceiver => ./receiver/sapmreceiver
+
+replace github.com/open-telemetry/opentelemetry-collector-contrib/receiver/scriptreceiver => ./receiver/scriptreceiver
 
 replace github.com/open-telemetry/opentelemetry-collector-contrib/receiver/signalfxreceiver => ./receiver/signalfxreceiver
 

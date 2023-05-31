@@ -16,7 +16,10 @@ package procpipe // import "github.com/open-telemetry/opentelemetry-collector-co
 
 import (
 	"context"
+	"crypto/sha512"
+	"encoding/hex"
 	"io"
+	"os"
 	"os/exec"
 	"sync/atomic"
 	"syscall"
@@ -25,7 +28,9 @@ import (
 	"go.uber.org/zap"
 )
 
-// Commander can start/stop/restat the Agent executable and also watch for a signal
+const LinuxScriptsLocation = "/etc/otel/collector/scripts/"
+
+// Commander can start/stop/restart the Agent executable and also watch for a signal
 // for the Agent process to finish.
 type Commander struct {
 	logger       *zap.Logger
@@ -58,7 +63,12 @@ func (c *Commander) Start(ctx context.Context) error {
 	//		return fmt.Errorf("cannot create %s: %s", logFilePath, err.Error())
 	//	}
 
-	c.cmd = exec.CommandContext(ctx, c.execFilePath, c.args...) //nolint:gosec
+	if !c.VerifyChecksum(c.execFilePath) {
+		c.logger.Warn("Script was modified, aborting execution", zap.String("script", c.execFilePath))
+		return nil
+	}
+
+	c.cmd = exec.CommandContext(ctx, LinuxScriptsLocation+c.execFilePath, c.args...) //nolint:gosec
 
 	// Capture standard output and standard error.
 	c.cmd.Stdout = c.stdout
@@ -178,4 +188,26 @@ func (c *Commander) Stop(ctx context.Context) error {
 	close(finished)
 
 	return innerErr
+}
+
+func (c *Commander) VerifyChecksum(scriptName string) bool {
+	oldSum := scriptChecksums[scriptName]
+
+	f, err := os.Open(LinuxScriptsLocation + scriptName)
+	defer func(f *os.File) {
+		err2 := f.Close()
+		if err2 != nil {
+			return
+		}
+	}(f)
+	if err != nil {
+		return false
+	}
+
+	hasher := sha512.New()
+	if _, err := io.Copy(hasher, f); err != nil {
+		return false
+	}
+	freshSum := hex.EncodeToString(hasher.Sum(nil))
+	return oldSum == freshSum
 }

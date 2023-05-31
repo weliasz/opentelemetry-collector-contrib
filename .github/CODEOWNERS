@@ -221,6 +221,7 @@ receiver/redisreceiver/                                  @open-telemetry/collect
 receiver/riakreceiver/                                   @open-telemetry/collector-contrib-approvers @djaglowski @armstrmi
 receiver/saphanareceiver/                                @open-telemetry/collector-contrib-approvers @dehaansa
 receiver/sapmreceiver/                                   @open-telemetry/collector-contrib-approvers @atoulme
+receiver/scriptreceiver/                                 @open-telemetry/collector-contrib-approvers @atoulme
 receiver/signalfxreceiver/                               @open-telemetry/collector-contrib-approvers @pjanotti @dmitryax
 receiver/simpleprometheusreceiver/                       @open-telemetry/collector-contrib-approvers @fatsheep9146
 receiver/skywalkingreceiver/                             @open-telemetry/collector-contrib-approvers @JaredTan95

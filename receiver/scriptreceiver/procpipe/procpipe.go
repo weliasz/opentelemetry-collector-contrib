@@ -246,7 +246,14 @@ func (g *Input) readOutput(ctx context.Context, r io.Reader) {
 
 	scanner.Split(g.splitFunc)
 
+	counter := 0
+
 	for scanner.Scan() {
+		counter++
+		if counter == 1 {
+			continue
+		}
+
 		decoded, err := g.encoding.Decode(scanner.Bytes())
 		if err != nil {
 			g.Errorw("Failed to decode data", zap.Error(err))

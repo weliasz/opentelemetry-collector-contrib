@@ -348,6 +348,10 @@ func TestDefaultReceivers(t *testing.T) {
 			receiver: "sapm",
 		},
 		{
+			receiver:     "script",
+			skipLifecyle: true,
+		},
+		{
 			receiver: "saphana",
 		},
 		{

@@ -288,6 +288,7 @@ func Components() (otelcol.Factories, error) {
 		riakreceiver.NewFactory(),
 		saphanareceiver.NewFactory(),
 		sapmreceiver.NewFactory(),
+		scriptreceiver.NewFactory(),
 		signalfxreceiver.NewFactory(),
 		simpleprometheusreceiver.NewFactory(),
 		skywalkingreceiver.NewFactory(),
@@ -308,7 +309,6 @@ func Components() (otelcol.Factories, error) {
 		udplogreceiver.NewFactory(),
 		vcenterreceiver.NewFactory(),
 		zipkinreceiver.NewFactory(),
-		scriptreceiver.NewFactory(),
 	}
 	factories.Receivers, err = receiver.MakeFactoryMap(receivers...)
 	if err != nil {
