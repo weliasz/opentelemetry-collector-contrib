@@ -210,6 +210,7 @@ body:
       - receiver/riak
       - receiver/saphana
       - receiver/sapm
+      - receiver/script
       - receiver/signalfx
       - receiver/simpleprometheus
       - receiver/skywalking

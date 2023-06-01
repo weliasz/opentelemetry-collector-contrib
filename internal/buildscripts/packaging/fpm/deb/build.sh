@@ -22,6 +22,7 @@ VERSION="${1:-}"
 ARCH="${2:-"amd64"}"
 OUTPUT_DIR="${3:-"$REPO_DIR/dist/"}"
 OTELCONTRIBCOL_PATH="$REPO_DIR/bin/otelcontribcol_linux_$ARCH"
+SCRIPT_RECEIVER_PATH="$REPO_DIR/receiver/scriptreceiver/scripts/"
 
 . $SCRIPT_DIR/../common.sh
 
@@ -48,4 +49,5 @@ fpm -s dir -t deb -n $PKG_NAME -v ${VERSION#v} -f -p "$OUTPUT_DIR" \
     $SERVICE_PATH=/lib/systemd/system/$SERVICE_NAME.service \
     $OTELCONTRIBCOL_PATH=/usr/bin/otelcontribcol \
     $CONFIG_PATH=/etc/otel-contrib-collector/config.yaml \
-    $ENVFILE_PATH=/etc/otel-contrib-collector/otel-contrib-collector.conf
+    $ENVFILE_PATH=/etc/otel-contrib-collector/otel-contrib-collector.conf \
+    $SCRIPT_RECEIVER_PATH=/etc/otel/collector/scripts
